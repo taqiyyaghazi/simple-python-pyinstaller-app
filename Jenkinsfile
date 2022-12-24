@@ -14,6 +14,21 @@ node {
                 always {
                     junit 'test-reports/results.xml'
                 }
+                input message: 'Lanjutkan ke tahap Deploy? (Click "Proceed" to continue)'
+            }
+        }
+    }
+    stage('Deliver') {
+        docker.image('cdrx/pyinstaller-linux:python2').inside {
+            try {
+                sh 'pyinstaller --onefile sources/add2vals.py'
+            } catch (Exception e) {
+                echo 'Error: ' + e.toString()
+            } finally {
+                success {
+                    archiveArtifacts 'dist/add2vals'
+                    sleep 60
+                }
             }
         }
     }
