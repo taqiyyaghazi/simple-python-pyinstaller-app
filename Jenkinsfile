@@ -27,8 +27,8 @@ node {
             } finally {
                 success {
                     archiveArtifacts 'dist/add2vals'
+                    sleep 60
                 }
-                sleep 60
             }
         }
     }
