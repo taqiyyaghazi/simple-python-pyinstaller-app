@@ -18,18 +18,10 @@ node {
             }
         }
     }
-    stage('Deliver') {
+    stage('Deploy') {
         docker.image('cdrx/pyinstaller-linux:python2').inside {
-            try {
-                sh 'pyinstaller --onefile sources/add2vals.py'
-            } catch (Exception e) {
-                echo 'Error: ' + e.toString()
-            } finally {
-                success {
-                    archiveArtifacts 'dist/add2vals'
-                    sleep 60
-                }
-            }
+            sh 'pyinstaller --onefile sources/add2vals.py'
+            archiveArtifacts 'dist/add2vals'
         }
     }
 }
