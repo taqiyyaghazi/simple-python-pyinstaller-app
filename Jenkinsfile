@@ -1,8 +1,7 @@
 node {
     stage('Build') {
-        docker.image('python:3-alpine').inside {
+        docker.image('python:2-alpine').inside {
             checkout scm
-            sh 'sudo pip install pyinstaller'
             sh 'python -m py_compile sources/add2vals.py sources/calc.py'
         }
     }
@@ -22,7 +21,8 @@ node {
     }
     stage('Deploy') {
         docker.image('cdrx/pyinstaller-linux:python2').inside("--entrypoint=''") {
-            try {
+            try {      
+                sh 'pip install pyinstaller'  
                 sh 'pyinstaller --version'
                 sh 'pyinstaller --onefile sources/add2vals.py'
             } catch (Exception e) {
