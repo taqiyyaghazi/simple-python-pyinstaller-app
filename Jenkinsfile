@@ -20,9 +20,8 @@ node {
         }
     }
     stage('Deploy') {
-        docker.image('cdrx/pyinstaller-linux:python2').inside("--entrypoint=''") {
-            try {      
-                sh 'pip install pyinstaller'  
+        docker.image('cdrx/pyinstaller-linux:python3').inside("--entrypoint=''") {
+            try {       
                 sh 'pyinstaller --version'
                 sh 'pyinstaller --onefile sources/add2vals.py'
             } catch (Exception e) {
