@@ -25,10 +25,8 @@ node {
             } catch (Exception e) {
                 echo 'Error: ' + e.toString()
             } finally {
-                success {
-                    archiveArtifacts 'dist/add2vals'
-                    sleep 60
-                }
+                archiveArtifacts 'dist/add2vals'
+                sleep 60
             }
         }
     }
