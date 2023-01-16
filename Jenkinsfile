@@ -23,8 +23,10 @@ node {
         docker.image('cdrx/pyinstaller-linux:python2').inside("--entrypoint=''") {
             try {       
                 sh 'python --version'
-                sh 'sudo apt-get install python-pip'
-                sh 'pip --version'
+                sh 'wget https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-3.6.tar.gz'
+                sh 'tar -xvzf PyInstaller-3.6.tar.gz'
+                sh 'cd PyInstaller-3.6'
+                sh 'python setup.py install'
                 sh 'pyinstaller --onefile sources/add2vals.py'
             } catch (Exception e) {
                 echo 'Error: ' + e.toString()
