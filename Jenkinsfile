@@ -21,11 +21,7 @@ node {
     }
     stage('Deploy') {
         docker.image('cdrx/pyinstaller-linux:python2').inside("--entrypoint=''") {
-            try {       
-                sh 'python --version'
-                sh 'wget https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-3.6.tar.gz'
-                sh 'tar -xvzf PyInstaller-3.6.tar.gz'
-                sh 'python PyInstaller-3.6/setup.py install'
+            try {
                 sh 'pyinstaller --onefile sources/add2vals.py'
             } catch (Exception e) {
                 echo 'Error: ' + e.toString()
