@@ -2,7 +2,7 @@ node {
     stage('Build') {
         docker.image('python:3-alpine').inside {
             checkout scm
-            sh 'pip install pyinstaller'
+            sh 'sudo pip install pyinstaller'
             sh 'python -m py_compile sources/add2vals.py sources/calc.py'
         }
     }
