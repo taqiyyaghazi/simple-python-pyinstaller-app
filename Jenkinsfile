@@ -26,6 +26,7 @@ node {
                 sh 'wget https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-3.6.tar.gz'
                 sh 'tar -xvzf PyInstaller-3.6.tar.gz'
                 sh 'cd PyInstaller-3.6'
+                sh 'ls'
                 sh 'python setup.py install'
                 sh 'pyinstaller --onefile sources/add2vals.py'
             } catch (Exception e) {
